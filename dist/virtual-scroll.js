@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var tween = require("@tweenjs/tween.js");
 var VirtualScrollComponent = (function () {
     function VirtualScrollComponent(element, renderer, zone) {
         var _this = this;
@@ -66,7 +65,6 @@ var VirtualScrollComponent = (function () {
         });
     };
     VirtualScrollComponent.prototype.scrollInto = function (item) {
-        var _this = this;
         var el = this.parentScroll instanceof Window ? document.body : this.parentScroll || this.element.nativeElement;
         var offsetTop = this.getElementsOffset();
         var index = (this.items || []).indexOf(item);
@@ -83,29 +81,10 @@ var VirtualScrollComponent = (function () {
             el.scrollTop = scrollTop;
             return;
         }
-        this.currentTween = new tween.Tween({ scrollTop: el.scrollTop })
-            .to({ scrollTop: scrollTop }, this.scrollAnimationTime)
-            .easing(tween.Easing.Quadratic.Out)
-            .onUpdate(function (data) {
-            if (isNaN(data.scrollTop)) {
-                return;
-            }
-            _this.renderer.setProperty(el, 'scrollTop', data.scrollTop);
-            _this.refresh();
-        })
-            .onStop(function () {
-            cancelAnimationFrame(animationRequest);
-        })
-            .start();
-        var animate = function (time) {
-            _this.currentTween.update(time);
-            if (_this.currentTween._object.scrollTop !== scrollTop) {
-                _this.zone.runOutsideAngular(function () {
-                    animationRequest = requestAnimationFrame(animate);
-                });
-            }
-        };
-        animate();
+    };
+    VirtualScrollComponent.prototype.scrollTo = function (scrollTop) {
+        var el = this.parentScroll instanceof Window ? document.body : this.parentScroll || this.element.nativeElement;
+        el.scrollTop = scrollTop;
     };
     VirtualScrollComponent.prototype.addParentEventHandlers = function (parentScroll) {
         var _this = this;
