@@ -90,6 +90,9 @@ var VirtualScrollComponent = (function () {
         var el = this.parentScroll instanceof Window ? document.body : this.parentScroll || this.element.nativeElement;
         el.scrollLeft = scrollLeft;
     };
+    VirtualScrollComponent.prototype.getElementRef = function () {
+        return this.element;
+    };
     VirtualScrollComponent.prototype.addParentEventHandlers = function (parentScroll) {
         var _this = this;
         this.removeParentEventHandlers();

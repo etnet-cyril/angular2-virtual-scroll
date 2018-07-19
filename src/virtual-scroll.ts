@@ -135,7 +135,7 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
   private lastTopPadding = -1;
 
   constructor(
-    private readonly element: ElementRef,
+    public element: ElementRef,
     private readonly renderer: Renderer2,
     private readonly zone: NgZone) { }
 
@@ -197,6 +197,10 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
   scrollLeft(scrollLeft: any) {
     let el: Element = this.parentScroll instanceof Window ? document.body : this.parentScroll || this.element.nativeElement;
     el.scrollLeft = scrollLeft;
+  }
+
+  getElementRef() {
+    return this.element;
   }
 
   private addParentEventHandlers(parentScroll: Element | Window) {
