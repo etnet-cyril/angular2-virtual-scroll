@@ -189,9 +189,14 @@ export class VirtualScrollComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  scrollTo(scrollTop: any) {
+  scrollTop(scrollTop: any) {
     let el: Element = this.parentScroll instanceof Window ? document.body : this.parentScroll || this.element.nativeElement;
     el.scrollTop = scrollTop;
+  }
+
+  scrollLeft(scrollLeft: any) {
+    let el: Element = this.parentScroll instanceof Window ? document.body : this.parentScroll || this.element.nativeElement;
+    el.scrollLeft = scrollLeft;
   }
 
   private addParentEventHandlers(parentScroll: Element | Window) {

@@ -82,9 +82,13 @@ var VirtualScrollComponent = (function () {
             return;
         }
     };
-    VirtualScrollComponent.prototype.scrollTo = function (scrollTop) {
+    VirtualScrollComponent.prototype.scrollTop = function (scrollTop) {
         var el = this.parentScroll instanceof Window ? document.body : this.parentScroll || this.element.nativeElement;
         el.scrollTop = scrollTop;
+    };
+    VirtualScrollComponent.prototype.scrollLeft = function (scrollLeft) {
+        var el = this.parentScroll instanceof Window ? document.body : this.parentScroll || this.element.nativeElement;
+        el.scrollLeft = scrollLeft;
     };
     VirtualScrollComponent.prototype.addParentEventHandlers = function (parentScroll) {
         var _this = this;
