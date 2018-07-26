@@ -239,6 +239,9 @@ var VirtualScrollComponent = (function () {
                 _this.previousStart = start;
                 _this.previousEnd = end;
                 if (_this.startupLoop === true) {
+                    if (end > 1) {
+                        _this.change.emit({ start: start, end: end });
+                    }
                     _this.refresh();
                 }
                 else {
